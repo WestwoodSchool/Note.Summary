@@ -1,4 +1,3 @@
-// Function to summarize notes
 function summarizeNotes() {
     let notes = document.getElementById("notesInput").value.trim();
     let mode = document.getElementById("summaryMode").value;
@@ -9,29 +8,68 @@ function summarizeNotes() {
         return;
     }
 
-    output.value = "AI is analyzing your notes... 🤖";
+    output.value = "AI is processing your notes... 🤖";
     output.disabled = true;
 
     let summary = generateSummary(notes, mode);
-    typeText(output, summary, 25); // Adjust typing speed (lower = faster)
+    typeText(output, summary, 15); // Typing speed: Lower = Faster
 }
 
 // AI-generated summary logic
 function generateSummary(notes, mode) {
-    let sentences = notes.split('. '); // Split text into sentences
-    let keyPoints = sentences.slice(0, Math.min(sentences.length, 5)); // Get first 5 key points
+    let sentences = notes.split('. ');
+    let keyPoints = sentences.slice(0, Math.min(sentences.length, 5)); // Extract key sentences
 
     if (mode === "concise") {
-        return keyPoints.join(". ") + "."; // Short summary
+        return `📌 Quick Summary:\n\n${keyPoints.join(". ")}.`;
     } else if (mode === "detailed") {
-        return `Detailed Breakdown:\n\n` + keyPoints.join(".\n\n") + "."; // Expanded details
+        return `📖 Detailed Breakdown:\n\n${keyPoints.join(".\n\n")}.`;
     } else {
-        // Brainrot Mode (Funny & Chaotic)
-        return `🔥 Alright, here’s the deal: ${keyPoints.join("!!! Also, ")}!!! Absolute madness! 🚀😂`;
+        return generateHyperBrainrot(keyPoints); // Gen Alpha Chaos Mode
     }
 }
 
-// AI Typing Effect
+// **BRAINROT MODE (GEN ALPHA EDITION)**
+function generateHyperBrainrot(keyPoints) {
+    let chaoticOpeners = [
+        "YO THIS INFO GOT ME HITTING THE GRIDDY LIKE BABY GRONK 🕺🔥",
+        "BRO REALLY THINKS HE'S CARTI AFTER READING THIS 💀💀",
+        "SKIBIDI RIZZ GYATT IN REAL LIFE?? DAWG SHMLAWG 📢📢",
+        "JOHN PORK CALLED, HE SAID THIS INFO IS LITERALLY GOATED 🐖💯",
+        "DUKE DENNIS DID YOU PRAY TODAY? BECAUSE THIS SUMMARY ABOUT TO GO CRAZY 🙏🔥"
+    ];
+
+    let chaoticClosers = [
+        "ANYWAY THAT’S THE SUMMARY, NOW GO MEWING AND LOOKSMAXXING 😈",
+        "GGS, NOW GO POST THIS ON WHOLESOME REDDIT WITH SUBWAY SURFERS GAMEPLAY 🎮💀",
+        "EZ CLAPS, TIME TO WATCH A FAMILY GUY FUNNY MOMENTS COMPILATION 🔥",
+        "BRB, GOING BACK TO THE GOON CAVE WITH MRBEAST 💀",
+        "QUANDALE DINGLE JUST DM’D ME SAYING THIS INFO IS LITERALLY GRIMACE SHAKE WORTHY 💜🤮"
+    ];
+
+    let brainrotBody = keyPoints.map(point => {
+        let phrases = [
+            `LITERALLY MORE IMPACTFUL THAN OCEANGATE 🚢💀`,
+            `BRO THIS INFO IS BUILT DIFFERENT LIKE SMURF CAT VS STRAWBERRY ELEPHANT 🐘🌀`,
+            `RIZZED UP LIKE KEVIN JAMES TRYING TO IMPRESS LIVVY DUNNE 💅💯`,
+            `ABSOLUTE NPC DIALOGUE, BUT I RESPECT IT 🔥🔥`,
+            `BRO THIS FEELS LIKE KAI CENAT PAYING HIS FANUM TAX 💰💀`,
+            `I CAN HEAR ANDREW TATE PREACHING ABOUT THIS FROM HIS BUGATTI 🚗💨`,
+            `I SHOWSPEED SCREAMING "AMOGUS" WOULD SUMMARIZE THIS BETTER 🔴🔵`,
+            `BRO THIS GOT ME THINKING ABOUT FREDDY FAZBEAR’S PIZZA TOWER 🍕🐻`,
+            `THIS INFO IS SO UNHINGED IT FEELS LIKE COLLEEN BALLINGER’S UKULELE APOLOGY 💀🎶`,
+            `IMAGINE NOT KNOWING THIS WHILE HITTING "1 2 BUCKLE MY SHOE" 🔥`,
+            `AMBATUKAM, THIS INFO IS SHAKING MY WHOLE EXISTENCE 🌍💀`,
+            `HUGGY WUGGY WOULDN’T EVEN BE ABLE TO HANDLE THIS KNOWLEDGE 🧠💀`,
+            `LOOKS LIKE A QUANTUM RIZZ PHENOMENON BUT IT’S JUST MATH 📈📚`
+        ];
+        return `- ${point.toUpperCase()} ${getRandomElement(phrases)}`;
+    }).join("\n");
+
+    return `${getRandomElement(chaoticOpeners)}\n\n${brainrotBody}\n\n${getRandomElement(chaoticClosers)}`;
+}
+
+// AI Typing Effect (Real-Time Simulation)
 function typeText(element, text, speed) {
     element.value = "";
     let index = 0;
@@ -49,14 +87,14 @@ function typeText(element, text, speed) {
     type();
 }
 
-// Function to extract text from uploaded files (Images/PDFs)
+// **FILE UPLOAD HANDLING (IMAGE & PDF TEXT EXTRACTION)**
 document.getElementById("uploadFile").addEventListener("change", function () {
     let file = this.files[0];
 
     if (!file) return;
 
     let output = document.getElementById("notesInput");
-    output.value = "Extracting text from file... 🧐";
+    output.value = "Extracting text from file... 📖";
 
     let reader = new FileReader();
 
@@ -95,10 +133,15 @@ document.getElementById("uploadFile").addEventListener("change", function () {
     }
 });
 
-// Function to copy summary to clipboard
+// Copy Summary to Clipboard
 function copyToClipboard() {
     let output = document.getElementById("summaryOutput");
     output.select();
     document.execCommand("copy");
     alert("Summary copied to clipboard!");
+}
+
+// Helper function to get a random element from an array
+function getRandomElement(array) {
+    return array[Math.floor(Math.random() * array.length)];
 }
