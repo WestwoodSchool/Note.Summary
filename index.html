@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Note Summarizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Note Summarizer ✍️</h1>
+
+        <div class="input-group">
+            <label for="notesInput">Paste Your Notes:</label>
+            <textarea id="notesInput" rows="6" placeholder="Paste your notes here..."></textarea>
+        </div>
+
+        <div class="input-group">
+            <label for="summaryMode">Choose a Summary Mode:</label>
+            <select id="summaryMode">
+                <option value="bullet">Bullet Points</option>
+                <option value="simple">Explain Like I'm 5</option>
+            </select>
+        </div>
+
+        <button onclick="summarizeNotes()">Summarize Notes</button>
+
+        <div class="output-group">
+            <label for="summaryOutput">AI Summary:</label>
+            <textarea id="summaryOutput" rows="6" readonly></textarea>
+            <button onclick="copyToClipboard()">Copy Summary</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made by <strong>Simon Drastil</strong> 🚀</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
