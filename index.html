@@ -10,23 +10,30 @@
     <div class="container">
         <h1>AI Note Summarizer ✍️</h1>
 
+        <!-- Upload Section -->
         <div class="input-group">
-            <label for="notesInput">Paste Your Notes:</label>
+            <label for="uploadFile">Upload Notes (Image/PDF)</label>
+            <input type="file" id="uploadFile" accept=".png, .jpg, .jpeg, .pdf">
+        </div>
+
+        <div class="input-group">
+            <label for="notesInput">Or Paste Your Notes</label>
             <textarea id="notesInput" rows="6" placeholder="Paste your notes here..."></textarea>
         </div>
 
         <div class="input-group">
-            <label for="summaryMode">Choose a Summary Mode:</label>
+            <label for="summaryMode">Choose Summary Style</label>
             <select id="summaryMode">
-                <option value="bullet">Bullet Points</option>
-                <option value="simple">Explain Like I'm 5</option>
+                <option value="concise">Concise</option>
+                <option value="detailed">Detailed</option>
+                <option value="brainrot">Brainrot (funny & chaotic)</option>
             </select>
         </div>
 
         <button onclick="summarizeNotes()">Summarize Notes</button>
 
         <div class="output-group">
-            <label for="summaryOutput">AI Summary:</label>
+            <label for="summaryOutput">AI Summary</label>
             <textarea id="summaryOutput" rows="6" readonly></textarea>
             <button onclick="copyToClipboard()">Copy Summary</button>
         </div>
@@ -37,5 +44,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script> <!-- OCR for Image Text Extraction -->
 </body>
 </html>
